@@ -1,164 +1,158 @@
+# Frappe Framework Notes
+
 ## Prerequisites and Setup
 
-1. **Main Prerequisites**:
-   - Frappe Framework
-   - Python, MariaDB, Redis, Node.js
-   - Git for version control
-   - Nginx for production
+1. **What are the main prerequisites for setting up Frappe Framework?**  
+   - Python, MariaDB, Redis, Node.js  
+   - Git for version control  
+   - Nginx for production  
 
-2. **Purpose of the `bench init frappe-bench` Command**:
-   The `bench init frappe-bench` command creates a new directory structure for your Frappe app, initializing necessary directories like `frappe-bench`, `sites`, and `apps`. It sets up the Frappe environment and creates the basic structure to begin working with apps and sites.
+2. **What is the purpose of the `bench init frappe-bench` command?**  
+   It initializes a directory structure for your Frappe app, including folders like `sites`, `apps`, and `logs`. It also sets up the Frappe environment.
 
-3. **Key Directories in `frappe-bench`**:
-   - `sites`: Contains the sites (databases) for the app.
-   - `apps`: Contains the app source code.
-   - `logs`: Contains logs for errors and operations.
-   - `config`: Holds configuration files.
+3. **What are the key directories created under `frappe-bench`?**  
+   - `sites`: Contains site databases and configurations.  
+   - `apps`: Holds the source code for your Frappe apps.  
+   - `logs`: Stores error and operation logs.  
+   - `config`: Contains configuration files.  
 
 ---
 
 ## DocType Creation and Management
 
-4. **DocType in Frappe Framework**:
-   A **DocType** is a model that defines a database table and its behavior in the Frappe framework. It is similar to models in other web frameworks like Django or Ruby on Rails.
+4. **What is a DocType in Frappe?**  
+   A DocType is a database model that defines the table structure and behavior within the framework.
 
-5. **Creating the Article DocType**:
-   The fields required for the **Article** DocType are:
-   - `Title`: Data
-   - `Content`: Text
-   - `Category`: Select
-   - `Status`: Select
-   - `Publish Date`: Date
+5. **Which fields were created for the Article DocType?**  
+   - Title (Data)  
+   - Content (Text)  
+   - Category (Select)  
+   - Status (Select)  
+   - Publish Date (Date)  
 
-   **Naming Convention for Articles**:
-   The naming convention for the **Article** was set to `Article.#####`, where `#####` is an auto-generated number.
+6. **What is the naming convention for Articles?**  
+   Articles are named as `Article.#####`, where `#####` is an auto-generated number.
 
 ---
 
 ## Database and Data Structure
 
-6. **What Happens in the Database When You Create a New DocType**:
-   When you create a new DocType, Frappe automatically generates a corresponding table in the database. Each field in the DocType corresponds to a column in the table.
+7. **What happens in the database when a new DocType is created?**  
+   A corresponding table is created, where each field in the DocType becomes a column.
 
-7. **Standard Fields in DocTypes**:
-   - `name`: Primary key of the document.
-   - `owner`: The creator of the document.
-   - `created`: Timestamp when the document was created.
-   - `modified`: Timestamp when the document was last modified.
-   - `docstatus`: Indicates whether the document is in draft, submitted, etc.
+8. **What are some standard fields in DocTypes?**  
+   - `name` (Primary key)  
+   - `owner` (Document creator)  
+   - `created` and `modified` timestamps  
+   - `docstatus` (Document state: draft, submitted, etc.)
 
-8. **Link Field Type**:
-   The **Link** field type creates a relationship between two DocTypes, similar to a foreign key in other frameworks. In the Library Management System, **Library Member** is linked to **Library Membership** via the **Link** field.
+9. **What is the purpose of the Link field type?**  
+   It establishes a relationship between two DocTypes, functioning like a foreign key.
 
 ---
 
 ## Permissions and Security
 
-9. **Roles Created for the Library Management System**:
-   - **Librarian**: Has full CRUD operations on all documents.
-   - **Library Member**: Can only view their own membership and transaction details.
+10. **Which roles were created in the Library Management System?**  
+    - Librarian  
+    - Library Member  
 
-10. **Permissions for Librarian and Library Member**:
-    - The **Librarian** role can create, edit, and delete any document, while the **Library Member** role can only view their own data.
-    - Actions like editing and deleting documents can be restricted using permission rules.
+11. **How do permissions differ between Librarians and Library Members?**  
+    - Librarians can create, edit, and delete documents.  
+    - Library Members can only view their own membership and transaction details.
 
 ---
 
 ## Controller Methods
 
-11. **Purpose of Controller Methods in DocTypes**:
-    Controller methods define business logic that runs at different points in a document's lifecycle (e.g., before saving, before submitting).
+12. **What is the purpose of controller methods in DocTypes?**  
+    They define business logic at various stages of a document’s lifecycle, such as before saving or submitting.
 
-12. **Usage of `before_save` in Library Member**:
-    The `before_save` method was used to ensure that no two memberships for the same member can overlap.
+13. **How was `before_save` used in the Library Member DocType?**  
+    It ensured that memberships for the same member do not overlap.
 
-13. **Validation in Library Transaction Controller**:
-    Validation ensures the correct status of an article before it's issued and ensures that memberships are active before issuing an article.
+14. **What validations were added in the Library Transaction controller?**  
+    - Ensuring articles are available before issuing.  
+    - Verifying active memberships for issuing articles.
 
 ---
 
 ## Types of DocTypes
 
-14. **Submittable DocType**:
-    A **Submittable** DocType is a type of document that can be submitted (finalized). In the Library Management System, **Library Membership** is a submittable DocType.
+15. **What is a Submittable DocType?**  
+    A DocType that can be finalized (e.g., **Library Membership**).
 
-15. **Single DocType**:
-    A **Single DocType** holds only one record. **Library Settings** is a Single DocType because we only need one set of settings for the whole library system.
+16. **What is a Single DocType?**  
+    A DocType that holds a single record (e.g., **Library Settings**).
 
 ---
 
 ## Form Scripts and UI
 
-16. **Custom Buttons on Library Member Form**:
-    Custom buttons were added to trigger actions like issuing or returning books. These buttons enhance the form's functionality.
+17. **What custom buttons were added to the Library Member form?**  
+    Buttons to trigger actions like issuing or returning books.
 
-17. **Enhancement with Form Scripts**:
-    Form scripts allow you to add custom behavior to forms, such as showing alerts or performing validations when users interact with the form.
+18. **What is the role of form scripts?**  
+    To add dynamic behavior, such as alerts and field validations, to forms.
 
 ---
 
 ## Portal Pages
 
-18. **Enabling Web View for Articles**:
-    To enable web view for articles, we enabled **Has Web View** and **Allow Guest to View** in the DocType settings. The route field is used to specify the URL path.
+19. **How was web view enabled for articles?**  
+    By enabling **Has Web View** and **Allow Guest to View** in the DocType settings.
 
-19. **Difference Between `article.html` and `article_row.html`**:
-    - `article.html` is used for the full display of an article.
-    - `article_row.html` is used for displaying a summary or list of articles.
+20. **What is the difference between `article.html` and `article_row.html`?**  
+    - `article.html`: Full article display.  
+    - `article_row.html`: Displays article summaries or lists.
 
 ---
 
 ## System Integration
 
-20. **Handling Article Status Changes**:
-    Article status changes (e.g., issued, returned) are tracked by updating the **Status** field in the Article DocType. When issuing an article, the system ensures the article's availability.
+21. **How are article status changes tracked?**  
+    By updating the **Status** field in the Article DocType.
 
-21. **Membership Validation**:
-    The system checks if a member has an active membership before allowing them to issue an article. This is validated in the controller method using the `before_submit` hook.
+22. **How is membership validated before issuing articles?**  
+    Through the `before_submit` hook, ensuring the membership is active.
 
 ---
 
 ## Technical Implementation
 
-22. **Handling Database Queries**:
-    Database queries are handled using Frappe's ORM, like `frappe.db.get_all()` for fetching records or `frappe.db.insert()` for adding new records.
+23. **How are database queries handled in Frappe?**  
+    Using Frappe's ORM methods like `frappe.db.get_all()` and `frappe.db.insert()`.
 
-23. **Throwing Validation Errors**:
-    Validation errors are thrown using `frappe.throw()` to display messages like "This field cannot be empty" or custom validation messages.
+24. **How are validation errors displayed?**  
+    Using `frappe.throw()` for custom error messages.
 
-24. **Naming System for Articles**:
-    Articles are named using the naming convention `Article.#####`, where `#####` is an auto-generated number to uniquely identify each article.
+25. **What naming system is used for articles?**  
+    Articles are named `Article.#####`, with an auto-generated number.
 
-25. **Article Availability Tracking**:
-    Availability is tracked by the **Status** field in the Article DocType. It changes based on whether the article is issued or available.
+26. **How is article availability tracked?**  
+    Through the **Status** field, which changes depending on whether the article is issued or available.
+
+---
 
 ## App Installation and Management
 
-26. **What Happens if You Try to Install an App Without Specifying the `--site` Flag?**
-    An error will occur because Frappe cannot determine which site the app should be installed on.
+27. **What happens if the `--site` flag is omitted during app installation?**  
+    An error occurs because Frappe cannot determine the target site.
 
-27. **What Files or Configurations Are Updated When an App Is Installed?**
-    - The app's configuration is added to the site’s `site_config.json`.
-    - The app's database tables and modules are initialized.
+28. **What files are updated when an app is installed?**  
+    - `site_config.json` for site configuration.  
+    - Database tables for the app.
 
-28. **Can the Same App Be Installed on Multiple Sites?**
-    Yes, the same app can be installed on different sites within the same `frappe-bench`.
+29. **Can an app be installed on multiple sites?**  
+    Yes, within the same `frappe-bench`.
 
-29. **What Happens if the App Installation Fails?**
-    You can troubleshoot the failure by checking the error logs or using the following command:
-    ```
-    bench --site <site_name> reinstall
-    ```
-    You can also inspect the logs in `logs/bench.log` for further details.
+30. **What happens if an app installation fails?**  
+    Check error logs or use `bench --site <site_name> reinstall`.
 
-30. **What is the Role of `hooks.py` During App Installation?**
-    `hooks.py` defines custom initialization steps, like adding fixtures or setting up permissions, which are executed during the app installation process.
+31. **What is the role of `hooks.py` during installation?**  
+    It defines initialization steps like fixtures and permissions.
 
-31. **How Do You Handle App Dependencies?**
-    - Specify dependencies in the `requirements.txt` file of the app, which will be automatically installed when the app is installed.
-    - Check error logs for details using:
-    ```
-    bench --site <site_name> reinstall
-    ```
-    Or inspect the logs in `logs/bench.log`.
+32. **How are app dependencies handled?**  
+    Through the `requirements.txt` file, specifying packages that must be installed.  
 
+---
