@@ -14,6 +14,7 @@ Jinja templates allow embedding dynamic content using:
     Double curly braces ({{ }}) for variables.
     Curly braces with percent signs ({% %}) for control structures
      like loops and conditions.
+     {# #} for comments (even multiline) inside the template.
 Practical Use Cases in Frappe
 
   1)  Email Templates: Use Jinja templates in .md files to create email bodies.
