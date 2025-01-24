@@ -8,7 +8,7 @@ const urlsToCache = [
   "/icons/android-chrome-512x512.png" 
 ];
 
-// Install the service worker and cache important files
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
