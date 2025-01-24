@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PWA</title>
+  </head>
+ 
+
+
+  
+
+  <link rel="manifest" href="manifest.json">
+
+  
+  <link rel="stylesheet" href="css/style.css">
+
+<body>
+  <header>
+    <h1>Welcome to My Simple PWA</h1>
+    <p>Hi, I'm Manvir Singh. Here's a little about me!</p>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I am passionate about learning new things and creating fun projects.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Manvir Singh</p>
+  </footer>
+
+ 
+
+  <!-- Register Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then(() => console.log("Service Worker Registered"))
+          .catch((error) => console.error("Service Worker Registration Failed:", error));
+      });
+    }
+  </script>
+</body>
+</html>
