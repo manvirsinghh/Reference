@@ -17,7 +17,7 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// Serve cached files when offline
+
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
@@ -26,7 +26,6 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
-// Activate the service worker
 self.addEventListener("activate", (event) => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
