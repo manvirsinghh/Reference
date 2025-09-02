@@ -1,0 +1,1 @@
+Route::get('/events/all', [EventController::class, 'listAll'])->name('events.all');
